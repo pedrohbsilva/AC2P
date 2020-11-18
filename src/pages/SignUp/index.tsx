@@ -14,6 +14,10 @@ import {
   CreateAccountButton,
   CreateAccountButtonText,
   ListOptions,
+  ContainerColor,
+  ContainerButton,
+  TextButton,
+  TextSignUp
 } from './styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -64,8 +68,8 @@ const SignUp: React.FC = () => {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
       <SafeAreaView style={{ flex: 1 }}>
-        <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 50 }}>
-          <Text>Faça seu cadastro</Text>
+        <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 90, marginBottom: -20 }}>
+          <TextSignUp>Faça seu cadastro</TextSignUp>
         </View>
         <ListOptions
           contentContainerStyle={Platform.OS === 'web' ? { flex: 1 } : undefined}
@@ -145,11 +149,14 @@ const SignUp: React.FC = () => {
                 returnKeyType="send"
                 onSubmitEditing={() => formRef.current?.submitForm()}
               />
-              <TouchableOpacity onPress={() => formRef.current?.submitForm()}>
-                <Text>
-                Cadastrar
-                </Text>
-              </TouchableOpacity>
+              <ContainerColor>
+                <ContainerButton onPress={() => formRef.current?.submitForm()}>
+                  <TextButton>
+                  Cadastrar
+                  </TextButton>
+                </ContainerButton>
+              </ContainerColor>
+              
             </Form>
 
             <CreateAccountButton onPress={() => navigation.goBack()}>

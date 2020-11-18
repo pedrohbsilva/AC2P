@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export const Container = styled.View`
   flex: 1;
@@ -12,12 +13,19 @@ export const ListOptions = styled.ScrollView.attrs({
 })`
 flex: 1;
 `;
-export const ForgotPassword = styled.TouchableOpacity`
-  margin-top: 24px;
+export const ContainerColor = styled(LinearGradient).attrs({
+  colors: ['#ca1ba7', '#2e77b4'],  
+  start: [1, 3],
+  end: [0, 1],
+})`
 `;
-export const ForgotPasswordText = styled.Text`
-  color: #C4C4C4;
-  font-size: 18px;
+export const ContainerButton = styled.TouchableOpacity`
+  align-items: center;
+  padding: 10px;
+`;
+export const TextButton = styled.Text`
+  color: #fff;
+  font-size: 20px;
   font-family: 'Poppins_600SemiBold';
 `;
 export const CreateAccountButton = styled.TouchableOpacity`
@@ -33,4 +41,10 @@ export const CreateAccountButtonText = styled.Text`
   font-family: 'Poppins_300Light';
   margin-left: 16px;
   text-decoration-line: underline;
+`;
+
+export const TextSignIn = styled.Text`
+  color: #ca1ba7;
+  font-size: 26px;
+  font-family: 'Poppins_600SemiBold';
 `;

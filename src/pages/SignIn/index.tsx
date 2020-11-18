@@ -12,11 +12,13 @@ import { useAuth } from '../../hooks/auth';
 
 import {
   Container,
-  ForgotPassword,
-  ForgotPasswordText,
+  ContainerButton,
+  ContainerColor,
+  TextButton,
   CreateAccountButton,
   CreateAccountButtonText,
   ListOptions,
+  TextSignIn
 } from './styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -63,8 +65,10 @@ const SignIn: React.FC = () => {
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
         <SafeAreaView style={{ flex: 1 }}>
+          <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 90, marginBottom: -20 }}>
+            <TextSignIn>Faça seu login</TextSignIn>
+          </View>
           <ListOptions
-            contentContainerStyle={Platform.OS === 'web' ? { flex: 1 } : undefined}
             keyboardShouldPersistTaps="handled"
           >
             <Container>
@@ -94,14 +98,18 @@ const SignIn: React.FC = () => {
                   formRef.current?.submitForm()
                   )}
                 />
-                <TouchableOpacity onPress={() => navigation.navigate('Map')}
-                >
-                  {isLoading === false
-                  
-                    ? <Text>Entrar</Text> : (
-                      <Text>Carregando...</Text>
-                    )}
-                </TouchableOpacity>
+                <ContainerColor>
+                  <ContainerButton 
+                    onPress={() => navigation.navigate('Map')}
+                  >
+                    {isLoading === false
+                    
+                      ? <TextButton>Entrar</TextButton> : (
+                        <TextButton>Carregando...</TextButton>
+                      )}
+                  </ContainerButton>
+                </ContainerColor>
+                
               </Form>
               <CreateAccountButton onPress={() => navigation.navigate('SignUp')}>
                 <Icon name="log-in" size={20} color="#C4C4C4" />

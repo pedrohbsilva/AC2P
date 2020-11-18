@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     top: Platform.select({ ios: 60, android: 40 }),
-    width: '100%'
+    width: '100%',
   },
   textInputContainer: {
     flex: 1,
