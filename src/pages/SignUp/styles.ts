@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export const Container = styled.View`
   flex: 1;
@@ -21,7 +22,27 @@ export const ForgotPasswordText = styled.Text`
   font-family: 'Poppins_600SemiBold';
 `;
 
+export const ContainerColor = styled(LinearGradient).attrs({
+  colors: ['#ca1ba7', '#2e77b4'],
+  start: [1, 3],
+  end: [0, 1],
+})`
+`;
+export const ContainerButton = styled.TouchableOpacity`
+  align-items: center;
+  padding: 10px;
+`;
+export const TextButton = styled.Text`
+  color: #fff;
+  font-size: 20px;
+  font-family: 'Poppins_600SemiBold';
+`;
     
+export const TextSignUp = styled.Text`
+  color: #ca1ba7;
+  font-size: 26px;
+  font-family: 'Poppins_600SemiBold';
+`;
 export const CreateAccountButton = styled.TouchableOpacity`
 
   padding: 16px 0 ${16 + getBottomSpace()}px;

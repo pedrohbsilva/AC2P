@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export const Container = styled.View`
     background-color: #fff;
@@ -12,6 +13,7 @@ export const Container = styled.View`
     border-color: #ddd;
     align-items: center;
     padding: 20px;
+    z-index: 1;
 `;
 
 export const Title = styled.Text`
@@ -33,14 +35,23 @@ export const ImageCar = styled.Image`
     height: 80px;
 `;
 
-export const RequestButton = styled(RectButton)`
+export const RequestButtonContainer = styled(LinearGradient).attrs({
+    colors: ['#ca1ba7', '#2e77b4'],  
+    start: [1, 0],
+    end: [0, 1],
+  })`
     height: 44px;
-    background-color: #222;
     justify-content: center;
     align-items: center;
     align-self: stretch;
     border-radius: 3px;
     margin-top: 10px;
+  `;
+
+export const RequestButton = styled(RectButton)`
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
 `;
 
 export const RequestButtonText = styled.Text`

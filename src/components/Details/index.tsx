@@ -9,7 +9,8 @@ import styles, {
   Description, 
   ImageCar,
   RequestButton, 
-  RequestButtonText 
+  RequestButtonText,
+  RequestButtonContainer
 } from './style';
 
 interface DetailsProps {
@@ -21,19 +22,18 @@ const Details: React.FC<DetailsProps> = ({ distance }) => {
   const cost = distance * 2.25;
 
   return (
-  <>
     <Container style={styles.container}>
       <Title>Viagens acessiveis</Title>
 
       <ImageCar source={ac2pCar} />
       <Title>AC2P Driver</Title>
       <Description>{NumberToReal(cost)}</Description>
-
-      <RequestButton onPress={() => { alert(`Parabéns você efetuou a solicitação da corrida no valor de ${NumberToReal(cost)}`) }}>
-        <RequestButtonText>Solicitar carro</RequestButtonText>
-      </RequestButton>
+      <RequestButtonContainer>
+        <RequestButton onPress={() => { alert(`Parabéns você efetuou a solicitação da corrida no valor de ${NumberToReal(cost)}`) }}>
+          <RequestButtonText>Solicitar carro</RequestButtonText>
+        </RequestButton>
+      </RequestButtonContainer>
     </Container>
-  </>
 );
 }
 
