@@ -7,7 +7,7 @@ import { GetPixelSize } from '../../utils/GetPixelSize';
 import Search from '../Search';
 import Details from '../Details';
 import Directions from '../Directions';
-
+import CurrentLocationButton from '../CurrentLocationButton'
 import markerImage from '../../assets/download4.png';
 import backIcon from '../../assets/back.png';
 
@@ -68,6 +68,7 @@ const MapComponent: React.FC = () => {
   const handleBack = () => {
     setDestination(null);
   }
+ 
 
   useEffect(() => {
     requestUserPosition();
@@ -75,10 +76,13 @@ const MapComponent: React.FC = () => {
 
   return (
     <Container>
+      <CurrentLocationButton cb={() => requestUserPosition()}/>
       <MapStyle
         region={location}
         showsUserLocation
-        loadingEnabled
+        showsCompass
+        showsMyLocationButton={false}
+        rotateEnabled={false}
         ref={MapViewRef}
       >
         {destination && (
@@ -136,8 +140,6 @@ const MapComponent: React.FC = () => {
           </>
         )}
       </MapStyle>
-
-
 
       {destination ? (
         <>

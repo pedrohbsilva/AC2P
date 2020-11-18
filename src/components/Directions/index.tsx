@@ -9,8 +9,7 @@ const Directions: React.FC<MapViewDirectionsProps> = ({destination, origin, onRe
       onReady={onReady}
       apikey={apikey}
       strokeWidth={3}
-      strokeColor="red"
-
+      strokeColor="#2e77be"
     />
   );
 }

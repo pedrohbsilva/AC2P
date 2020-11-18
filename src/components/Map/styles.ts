@@ -2,6 +2,7 @@ import { StyleSheet, Dimensions, Platform } from 'react-native';
 import styled from 'styled-components/native';
 import { BorderlessButton } from 'react-native-gesture-handler';
 import MapView from 'react-native-maps';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export const Container = styled.View`
   flex: 1;
@@ -40,12 +41,13 @@ export const LocationText = styled.Text`
   max-width: 65px;
 `;
 
-export const LocationTimeBox = styled.View`
-  background-color: #f11;
+export const LocationTimeBox = styled(LinearGradient).attrs({
+  colors: ['#ca1ba7', '#2e77b4'],  
+  start: [1, 0],
+  end: [0, 1],
+})`
   padding-top: 5px;
   padding-bottom: 5px;
-  border-width: 2px;
-  border-color: #f11;
   align-items: center;
   justify-content: center;
 `;
