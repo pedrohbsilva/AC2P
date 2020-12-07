@@ -20,10 +20,9 @@ interface DetailsProps {
 const Details: React.FC<DetailsProps> = ({ distance }) => {
 
   const cost = distance * 2.25;
-
   return (
     <Container style={styles.container}>
-      <Title>Viagens acessiveis</Title>
+      <Title>Viagens acessíveis</Title>
 
       <ImageCar source={ac2pCar} />
       <Title>AC2P Driver</Title>

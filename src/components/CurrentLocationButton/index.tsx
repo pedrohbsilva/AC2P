@@ -12,7 +12,7 @@ interface CurrentLocationButtonProps{
 }
 
 const CurrentLocationButton: React.FC<CurrentLocationButtonProps> = (props) => {
-  const bottom = props.bottom ? props.bottom : 65
+  const bottom = props.bottom ? props.bottom : 135
   return (
     <Container style={[styles.container, {top: HEIGHT - bottom}]}>
         <MaterialIcons 

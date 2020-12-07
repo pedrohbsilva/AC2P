@@ -8,6 +8,7 @@ import {
   useFonts
 } from '@expo-google-fonts/poppins';
 import { NavigationContainer } from '@react-navigation/native';
+import AppProvider from './src/hooks';
 
 
 const App: React.FC = () => {
@@ -27,7 +28,9 @@ const App: React.FC = () => {
     <NavigationContainer>
       
     <StatusBar style="dark" />
-    <Routes />
+      <AppProvider>
+        <Routes />
+      </AppProvider>
     </NavigationContainer>
   )
   }

@@ -9,7 +9,7 @@ import { FormHandles } from '@unform/core';
 import { showMessage, hideMessage } from 'react-native-flash-message';
 import Input from '../../components/Input';
 import { useAuth } from '../../hooks/auth';
-
+import Logo from '../../assets/logo.jpeg';
 import {
   Container,
   ContainerButton,
@@ -18,7 +18,7 @@ import {
   CreateAccountButton,
   CreateAccountButtonText,
   ListOptions,
-  TextSignIn
+  ContainerImage
 } from './styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -37,14 +37,18 @@ const SignIn: React.FC = () => {
   const handleSignIn = useCallback(
     async (data: signInFormData) => {
       setIsLoading(true);
+      console.log(signIn)
       try {
-        
+        console.log('teste')
+
         await signIn({
           email: data.email,
           password: data.password,
         });
         setIsLoading(false);
       } catch (error) {
+        console.log(error)
+
         setIsLoading(false);
         
         showMessage({
@@ -65,13 +69,13 @@ const SignIn: React.FC = () => {
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
         <SafeAreaView style={{ flex: 1 }}>
-          <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 90, marginBottom: -20 }}>
-            <TextSignIn>Faça seu login</TextSignIn>
-          </View>
           <ListOptions
             keyboardShouldPersistTaps="handled"
           >
             <Container>
+              <ContainerImage>
+                <Image source={Logo} style={{height: 300, width: 300}}/>
+              </ContainerImage>
               <Form ref={formRef} onSubmit={handleSignIn} style={{ marginTop: 100 }}>
                 <Input
                   autoCorrect={false}
@@ -100,7 +104,7 @@ const SignIn: React.FC = () => {
                 />
                 <ContainerColor>
                   <ContainerButton 
-                    onPress={() => navigation.navigate('Map')}
+                    onPress={() => formRef.current?.submitForm()}
                   >
                     {isLoading === false
                     

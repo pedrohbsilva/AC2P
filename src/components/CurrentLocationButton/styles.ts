@@ -14,3 +14,4 @@ export const Container = styled(LinearGradient).attrs({
   justify-content: center;
   align-items: center;
 `;
+
