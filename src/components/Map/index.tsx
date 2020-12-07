@@ -21,6 +21,9 @@ import styles,{
   LocationTimeTextSmall,
   BackButton
 } from './styles';
+import { useNavigation } from '@react-navigation/native';
+import { StackHeaderLeftButtonProps } from '@react-navigation/stack';
+import MenuIcon from '../Menu';
 
 const MapComponent: React.FC = () => {
 
@@ -68,10 +71,15 @@ const MapComponent: React.FC = () => {
   const handleBack = () => {
     setDestination(null);
   }
- 
+
+  const navigation = useNavigation();
 
   useEffect(() => {
     requestUserPosition();
+
+    navigation.setOptions({
+      headerLeft: (props: StackHeaderLeftButtonProps) => (<MenuIcon/>)
+    });
   }, []);
 
   return (

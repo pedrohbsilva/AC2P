@@ -24,7 +24,7 @@ export const LocationBox = styled.View`
   border-radius: 3px;
   flex-direction: row;
   margin-top: 17.5px;
-  max-width: 100px;
+  max-width: 150px;
   align-items: center;
   justify-content: center;
 `;
@@ -46,6 +46,7 @@ export const LocationTimeBox = styled(LinearGradient).attrs({
   start: [1, 0],
   end: [0, 1],
 })`
+  width: 30px;
   padding-top: 5px;
   padding-bottom: 5px;
   align-items: center;
