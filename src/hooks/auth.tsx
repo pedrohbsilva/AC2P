@@ -1,97 +1,98 @@
 import React, {
-  createContext, useCallback, useContext, useState, useEffect,
+  createContext,
+  useCallback,
+  useState,
+  useContext,
+  useEffect,
 } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
-import { View } from 'react-native';
+
 import api from '../utils/api';
 
-interface AuthState{
-  token: string;
-  user:User;
-}
-
-interface SignInCredentials{
-  email: string;
-  password:string;
-}
-
-interface AuthContextData{
-  userInfo:User;
-  loading: boolean;
-  signIn(credentials: SignInCredentials): Promise<void>;
-  signOut(): void;
-  token: string;
-}
 interface User {
   id: string;
   name: string;
   email: string;
-  permission_id: string;
+}
+interface AuthState {
+  token: string;
+  user: User;
+}
+
+interface SignInCredentials {
+  email: string;
+  password: string;
+}
+
+interface AuthContextData {
+  user: User;
+  loading: boolean;
+  signIn(credentials: SignInCredentials): Promise<void>;
+  signOut(): void;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
-const AuthProvider: React.FC = ({ children }) => {
+export const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<AuthState>({} as AuthState);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    async function loadStoragedData(): Promise<void> {
-        const token = await AsyncStorage.getItem('@token');
-        const user = await AsyncStorage.getItem('@user');
-        if (token && user) {
-          api.defaults.headers.authorization = `Bearer ${token}`;
-          setData({ token, user: JSON.parse(user) });
-        }
+    async function loadStorageData(): Promise<void> {
+      const [token, user] = await AsyncStorage.multiGet([
+        '@AC2P:token',
+        '@AC2P:user',
+      ]);
+
+      if (token[1] && user[1]) {
+        api.defaults.headers.Authorization = `Bearer ${token[1]}`;
+
+        setData({ token: token[1], user: JSON.parse(user[1]) });
+      }
+
       setLoading(false);
     }
-    loadStoragedData();
+
+    loadStorageData();
   }, []);
 
   const signIn = useCallback(async ({ email, password }) => {
-    const response = await api.post('/sessions', {
+    const response = await api.post('/user/login', {
       email,
       password,
     });
-    const { token, userInfo } = response.data;
 
-      await AsyncStorage.multiSet([
-        ['@token', token],
-        ['@user', JSON.stringify(userInfo)],
-      ]);
-      api.defaults.headers.authorization = `Bearer ${token}`;
+    const { token, user } = response.data;
 
-    setData({ token, userInfo });
+    await AsyncStorage.multiSet([
+      ['@AC2P:token', token],
+      ['@AC2P:user', JSON.stringify(user)],
+    ]);
+
+    api.defaults.headers.Authorization = `Bearer ${token}`;
+
+    setData({ token, user });
   }, []);
 
   const signOut = useCallback(async () => {
+    await AsyncStorage.multiRemove(['@AC2P:token', '@AC2P:user']);
 
-      await AsyncStorage.multiRemove([
-        '@token',
-        '@user',
-      ]);
     setData({} as AuthState);
   }, []);
-  if (loading) {
-    return (
-      <View style={{ flex: 1 }} />
-    );
-  }
+
   return (
-    <AuthContext.Provider
-      value={{
-        userInfo: data.user, token: data.token, loading, signIn, signOut,
-      }}
-    >
+    <AuthContext.Provider value={{ user: data.user, signIn, signOut, loading }}>
       {children}
     </AuthContext.Provider>
   );
 };
-function useAuth(): AuthContextData {
+
+export function useAuth(): AuthContextData {
   const context = useContext(AuthContext);
 
   if (!context) {
-    throw new Error('UseAuth must be used within a AuthProvider');
+    throw new Error('useAuth must be used within an AuthProvider');
   }
+
   return context;
 }
-export { AuthProvider, useAuth };

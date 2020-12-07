@@ -15,7 +15,7 @@ flex: 1;
 `;
 export const ContainerColor = styled(LinearGradient).attrs({
   colors: ['#ca1ba7', '#2e77b4'],  
-  start: [1, 3],
+  start: [1, 0],
   end: [0, 1],
 })`
 `;
@@ -47,4 +47,11 @@ export const TextSignIn = styled.Text`
   color: #ca1ba7;
   font-size: 26px;
   font-family: 'Poppins_600SemiBold';
+`;
+
+export const ContainerImage = styled.View`
+  align-items: center;
+  justify-content: center;
+  margin-top: 90px;
+  margin-bottom: -180px;
 `;
